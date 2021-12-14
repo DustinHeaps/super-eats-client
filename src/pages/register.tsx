@@ -19,7 +19,7 @@ export const Register = () => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<RegisterForm>({
-    mode: 'onBlur',
+    mode: 'onChange',
     defaultValues: {
       role: UserRole.Client,
     },
@@ -48,9 +48,9 @@ export const Register = () => {
         <title>Register | Super Eats</title>
       </Helmet>
       <div className='w-full max-w-screen-sm flex flex-col px-5 items-center'>
-        <img src={logo} className='w-52 mb-5 ' alt='' />
+        <p className='text-5xl mb-5'>Super <span className='text-lime-600 font-medium'>Eats</span></p> 
         <h4 className='w-full text-3xl font-medium'>Let's Get Started</h4>
-        <div className='bg-white w-full max-w-lg pt-5 pb-8 rounded-lg text-center'>
+        <div className='bg-white w-full max-w-screen-sm pt-5 pb-8 rounded-lg text-center'>
           <form onSubmit={handleSubmit(onSubmit, onError)} className='flex flex-col mt-5 w-full'>
             <input
               {...register('email', {

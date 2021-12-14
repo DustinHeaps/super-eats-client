@@ -39,8 +39,9 @@ export const AddRestaurant = () => {
       const formBody = new FormData();
       formBody.append('file', actualFile);
 
+      const fetchURL = process.env.NODE_ENV === 'production' ? 'https://uber-eats-server.herokuapp.com/uploads/' : 'http://localhost:5000/uploads/';
       const { url: image } = await (
-        await fetch('http://localhost:5000/uploads/', {
+        await fetch(fetchURL, {
           method: 'POST',
           body: formBody,
         })
@@ -65,7 +66,7 @@ export const AddRestaurant = () => {
     }
   };
   return (
-    <div className='container flex flex-col items-center mt-52'>
+    <div className='container flex flex-col items-center mx-auto mt-16'>
       <Helmet>
         <title>Add Restaurant | Super Eats</title>
       </Helmet>
