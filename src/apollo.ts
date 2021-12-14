@@ -24,7 +24,7 @@ const authLink = setContext((_, {headers}) => {
 })
 
 const wsLink = new WebSocketLink({
-  uri: process.env.NODE_ENV === 'production' ? 'ws://uber-eats-server.herokuapp.com/graphql' : 'ws://localhost:5000/graphql',
+  uri: process.env.NODE_ENV === 'production' ? 'wss://uber-eats-server.herokuapp.com/graphql' : 'ws://localhost:5000/graphql',
   options: {
     reconnect: true,
     connectionParams: {
