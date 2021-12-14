@@ -1,0 +1,13 @@
+query searchRestaurants($input:SearchRestaurantInput!){
+  searchRestaurants(input:$input) {
+    message
+    success
+    restaurants {
+      name
+      id
+      image
+    }
+    totalPages
+    totalResults
+  }
+}

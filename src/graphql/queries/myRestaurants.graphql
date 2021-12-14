@@ -1,0 +1,14 @@
+query myRestaurants {
+  myRestaurants {
+    success
+    message
+    restaurants {
+      image
+      name
+      id
+      category {
+        name
+      }
+    }
+  }
+}

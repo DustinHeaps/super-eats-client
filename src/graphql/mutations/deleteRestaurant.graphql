@@ -1,0 +1,6 @@
+mutation deleteRestaurant($input: DeleteRestaurantInput!) {
+  deleteRestaurant(input: $input) {
+    success
+    message
+  }
+}

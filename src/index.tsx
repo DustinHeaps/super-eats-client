@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './tailwind.css';
 import reportWebVitals from './reportWebVitals';
+import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql } from '@apollo/client';
+import { client } from './apollo';
+import { HelmetProvider } from 'react-helmet-async';
+import { App } from './components/App';
+require('dotenv').config()
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

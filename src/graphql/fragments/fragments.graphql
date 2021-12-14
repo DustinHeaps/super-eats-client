@@ -1,0 +1,62 @@
+fragment Restaurant on Restaurant {
+  id
+  name
+  image
+  category {
+    name
+  }
+  address
+  isPromoted
+  menu {
+    ...DishParts
+  }
+  orders {
+    ...OrderParts
+  }
+}
+
+
+  fragment CategoryParts on Category {
+    id
+    name
+    image
+    slug
+    restaurantCount
+  }
+
+    fragment DishParts on Dish {
+    id
+    name
+    price
+    photo
+    description
+    options {
+      name
+      extra
+      choices {
+        name
+        extra
+      }
+    }
+  }
+
+  fragment OrderParts on Order {
+    id
+    createdAt
+    total
+  }
+
+  fragment FullOrderParts on Order {
+    id
+    status
+    total
+    driver {
+      email
+    }
+    customer {
+      email
+    }
+    restaurant {
+      name
+    }
+  }

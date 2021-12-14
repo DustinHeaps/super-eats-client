@@ -1,0 +1,13 @@
+query categories {
+  allCategories {
+    categories {
+      slug
+      name
+      restaurantCount
+      id
+      image
+    }
+    success
+    message
+  }
+}

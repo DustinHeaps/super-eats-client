@@ -1,0 +1,11 @@
+query allRestaurants($input: RestaurantsInput!) {
+  allRestaurants(input: $input) {
+    results {
+...Restaurant
+    }
+    success
+    message
+    totalPages
+    totalResults
+  }
+}

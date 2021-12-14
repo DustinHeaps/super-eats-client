@@ -1,0 +1,6 @@
+mutation updateRestaurant($input: UpdateRestaurantInput!) {
+  updateRestaurant(input: $input) {
+    success
+    message
+  }
+}

@@ -1,0 +1,10 @@
+query myRestaurant($input: MyRestaurantInput!) {
+  myRestaurant(input: $input) {
+    restaurant {
+      ...Restaurant
+    }
+    success
+    message
+    
+  }
+}

@@ -1,0 +1,17 @@
+query getCategory($input: CategoryInput!) {
+  category(input: $input) {
+    category {
+      slug
+      name
+      id
+
+      restaurantCount
+      restaurants {
+      ...Restaurant
+      }
+    }
+    success
+    message
+    totalPages
+  }
+}
