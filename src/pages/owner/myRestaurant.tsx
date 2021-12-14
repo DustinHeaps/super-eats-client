@@ -100,10 +100,11 @@ export const MyRestaurant = () => {
         <title>{data?.myRestaurant.restaurant?.name || '...loading'} | Super Eats</title>
         <script src='https://cdn.paddle.com/paddle/paddle.js'></script>
       </Helmet>
+
       <div
         className='bg-gray-700 bg-center bg-cover py-28'
         style={{
-          backgroundImage: `url(${data?.myRestaurant.restaurant?.image})`,
+          backgroundImage: `url('${data?.myRestaurant.restaurant?.image}')`,
         }}
       ></div>
       <div className='container mx-auto mt-10'>

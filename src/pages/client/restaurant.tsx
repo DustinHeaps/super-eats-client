@@ -127,7 +127,7 @@ export const Restaurant = () => {
       <div
         className='py-48 bg-gray-800 bg-center bg-cover'
         style={{
-          backgroundImage: `url(${data?.restaurant.restaurant?.image})`,
+          backgroundImage: `url('${data?.restaurant.restaurant?.image}')`,
         }}
       >
         <div className='w-3/12 py-8 pl-48 bg-white'>

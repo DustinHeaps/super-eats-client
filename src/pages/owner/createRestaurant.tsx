@@ -41,7 +41,7 @@ export const AddRestaurant = () => {
 
       const fetchURL = process.env.NODE_ENV === 'production' ? 'https://uber-eats-server.herokuapp.com/uploads/' : 'http://localhost:5000/uploads/';
       const { url: image } = await (
-        await fetch(fetchURL, {
+        await fetch('https://uber-eats-server.herokuapp.com/uploads/', {
           method: 'POST',
           body: formBody,
         })
