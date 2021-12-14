@@ -10,7 +10,7 @@ export const isLoggedInVar = makeVar(Boolean(token))
 export const jwtToken = makeVar(token)
 
 const httpLink = createHttpLink({
-  uri: process.env.NODE_ENV === 'production' ? 'http://uber-eats-server.herokuapp.com/graphql' : 'http://localhost:5000/graphql'
+  uri: process.env.NODE_ENV === 'production' ? 'https://uber-eats-server.herokuapp.com/graphql' : 'http://localhost:5000/graphql'
 })
 
 const authLink = setContext((_, {headers}) => {
