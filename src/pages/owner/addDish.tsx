@@ -84,9 +84,11 @@ export const AddDish = () => {
       await client.refetchQueries({
         include: 'all'
       });
+      
+      history.push(`/restaurants/${restaurantId}`);
     }
 
-    history.push(`/restaurants/${restaurantId}`);
+   
 
   } catch (e) {
     console.log(e)
