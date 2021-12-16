@@ -130,7 +130,7 @@ export const Restaurant = () => {
           backgroundImage: `url('${data?.restaurant.restaurant?.image}')`,
         }}
       >
-        <div className='w-3/12 py-8 pl-48 bg-white'>
+        <div className='w-3/12 py-8  text-center bg-white'>
           <h4 className='mb-3 text-4xl'>{data?.restaurant.restaurant?.name}</h4>
           <h5 className='mb-2 text-sm font-light'>{data?.restaurant.restaurant?.category?.name}</h5>
 

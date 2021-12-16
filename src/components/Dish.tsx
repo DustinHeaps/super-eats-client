@@ -39,12 +39,15 @@ export const Dish: React.FC<DishProps> = ({
 
   return (
     <div
-      className={`px-8 py-4 border cursor-pointer transition-all ${
+      className={` flex p-4 border cursor-pointer transition-all ${
         isSelected ? 'border-gray-800' : 'hover:border-gray-800'
       }`}
     >
-      <div className="mb-5">
-        <h3 className="text-lg font-medium flex items-center">
+      <div className="flex">
+
+        <div className='flex flex-col justify-between w-2/3 pr-3'>
+          <div>
+        <h3 className="text-lg font-medium flex items-center leading-6">
           {name}{' '}
           {orderStarted && (
             <button
@@ -57,10 +60,18 @@ export const Dish: React.FC<DishProps> = ({
             </button>
           )}
         </h3>
-        <h4 className="font-medium">{description}</h4>
+        <h4 className='font-light text-xs text-gray-600'>{description}</h4>
+        </div>
+        <span>${price}</span>
+        </div>
+        
+    
+
+    
+      <div className='w-1/3'>
         <img src={photo} alt=""/>
-      </div>
-      <span>${price}</span>
+        </div>
+        </div>
       {isCustomer && options && options?.length !== 0 && (
         <div>
           <h5 className="mt-6 mb-3 font-medium">Dish Options:</h5>

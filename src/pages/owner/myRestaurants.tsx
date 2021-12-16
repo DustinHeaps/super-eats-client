@@ -14,8 +14,15 @@ export const MyRestaurants = () => {
       <Helmet>
         <title>My Restaurants | Super Eats</title>
       </Helmet>
-      <div className='max-w-screen-xl mx-auto mt-32'>
-        <h2 className='text-4xl font-medium mb-10'>My Restaurants</h2>
+      <div className='max-w-screen-xl mx-auto mt-8'>
+        <div className='flex items-center'>
+        <h2 className='text-4xl font-medium'>My Restaurants</h2> 
+        {data?.myRestaurants.success && data.myRestaurants.restaurants.length > 0 &&
+          <Link className='text-lime-600 hover:underline  pl-4' to='/add-restaurant'>
+              Create another restaurant &rarr;
+            </Link>
+          }
+          </div>
         {data?.myRestaurants.success && data.myRestaurants.restaurants.length === 0 ? (
           <>
             <h4 className='text-xl mb-5'>You have no restaurants</h4>
@@ -36,6 +43,7 @@ export const MyRestaurants = () => {
             ))}
           </div>
         )}
+       
       </div>
     </div>
   );

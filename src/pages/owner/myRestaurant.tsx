@@ -108,7 +108,13 @@ export const MyRestaurant = () => {
         }}
       ></div>
       <div className='container mx-auto mt-10'>
-        <h2 className='mb-10 text-4xl font-medium'>{data?.myRestaurant.restaurant?.name || 'Loading...'}</h2>
+        {data?.myRestaurant.restaurant && (
+          <>
+            <h2 className='text-4xl font-medium'>{data?.myRestaurant.restaurant?.name}</h2>
+            <h4 className='mb-5 pt-1 font-light text-xs text-gray-600'>{data?.myRestaurant.restaurant?.address}</h4>
+          </>
+        )}
+
         <Link to={`/restaurants/${id}/add-dish`} className='px-10 py-3 mr-8 text-white bg-gray-800'>
           Add Dish &rarr;
         </Link>
@@ -134,56 +140,63 @@ export const MyRestaurant = () => {
           )}
         </div>
         <div className='mt-20 mb-10'>
-          <h4 className='text-2xl font-medium text-center'>Sales</h4>
-          <div className='mx-auto'>
-            <VictoryChart
-              height={500}
-              theme={VictoryTheme.material}
-              width={window.innerWidth}
-              domainPadding={50}
-              containerComponent={<VictoryVoronoiContainer />}
-            >
-              <VictoryLine
-                labels={({ datum }) => `$${datum.y}`}
-                labelComponent={<VictoryLabel style={{ fontSize: 18 } as any} renderInPortal dy={-20} />}
-                data={data?.myRestaurant.restaurant?.orders?.map((order) => ({
-                  x: order.createdAt.toString(),
-                  y: order.total,
-                }))}
-                interpolation='linear'
-                style={{
-                  data: {
-                    stroke: 'blue',
-                    strokeWidth: 5,
-                  },
-                }}
-              />
-              <VictoryAxis
-                style={{
-                  tickLabels: { fontSize: 20, fill: '#3d7c0f' } as any,
-                }}
-                dependentAxis
-                tickFormat={(tick) => `$${tick}`}
-              />
-              <VictoryAxis
-                tickLabelComponent={<VictoryLabel renderInPortal />}
-                style={{
-                  tickLabels: {
-                    fontSize: 20,
-                    fill: '#3d7c0f',
-                    angle: 45,
-                  } as any,
-                }}
-                tickFormat={(tick) => new Date(tick).toLocaleDateString('ru')}
-              />
-            </VictoryChart>
-            {/* <VictoryPie data={chartData} />
+        
+          {data?.myRestaurant.restaurant?.orders?.length === 0 ? (
+            <h4 className='text-2xl font-medium text-center'>No Sales Yet</h4>
+          ) : (
+            <>
+              <h4 className='text-2xl font-medium text-center'>Sales</h4>
+              <div className='mx-auto'>
+                <VictoryChart
+                  height={500}
+                  theme={VictoryTheme.material}
+                  width={window.innerWidth}
+                  domainPadding={50}
+                  containerComponent={<VictoryVoronoiContainer />}
+                >
+                  <VictoryLine
+                    labels={({ datum }) => `$${datum.y}`}
+                    labelComponent={<VictoryLabel style={{ fontSize: 18 } as any} renderInPortal dy={-20} />}
+                    data={data?.myRestaurant.restaurant?.orders?.map((order) => ({
+                      x: order.createdAt.toString(),
+                      y: order.total,
+                    }))}
+                    interpolation='linear'
+                    style={{
+                      data: {
+                        stroke: 'blue',
+                        strokeWidth: 5,
+                      },
+                    }}
+                  />
+                  <VictoryAxis
+                    style={{
+                      tickLabels: { fontSize: 20, fill: '#3d7c0f' } as any,
+                    }}
+                    dependentAxis
+                    tickFormat={(tick) => `$${tick}`}
+                  />
+                  <VictoryAxis
+                    tickLabelComponent={<VictoryLabel renderInPortal />}
+                    style={{
+                      tickLabels: {
+                        fontSize: 20,
+                        fill: '#3d7c0f',
+                        angle: 45,
+                      } as any,
+                    }}
+                    tickFormat={(tick) => new Date(tick).toLocaleDateString('ru')}
+                  />
+                </VictoryChart>
+                {/* <VictoryPie data={chartData} />
             <VictoryChart domainPadding={20}>
               <VictoryAxis tickFormat={(step) => `$${step / 1000}k`} dependentAxis />
               <VictoryAxis tickFormat={(step) => `Day ${step}`} />
               <VictoryBar data={chartData} />
             </VictoryChart> */}
-          </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

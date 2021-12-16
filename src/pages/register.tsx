@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useForm, useFormState } from 'react-hook-form';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { FormError } from '../components/FormError';
 import { useRegisterMutation, UserRole } from '../generated/graphql';
@@ -24,7 +24,7 @@ export const Register = () => {
       role: UserRole.Client,
     },
   });
-
+  const history = useHistory();
   const [registerUser, { data, loading }] = useRegisterMutation();
   const onSubmit = async (data: RegisterForm) => {
     console.log(data);
@@ -38,7 +38,9 @@ export const Register = () => {
       },
     });
     if (res.data?.register.success) {
-      <Redirect to='/' />;
+      alert('Account Created! Log in now!');
+      history.push('/');
+      // <Redirect to='/' />;
     }
   };
   const onError = () => {};

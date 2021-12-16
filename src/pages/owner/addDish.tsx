@@ -58,7 +58,7 @@ export const AddDish = () => {
     formBody.append('file', actualFile);
 
     const { url: photo } = await (
-      await fetch('http://localhost:5000/uploads/', {
+      await fetch('https://uber-eats-server.herokuapp.com/uploads/', {
         method: 'POST',
         body: formBody,
       })
@@ -82,7 +82,7 @@ export const AddDish = () => {
       });
     }
 
-    history.goBack();
+    history.push(`/restaurants/${restaurantId}`);
   };
 
   const [options, setOptions] = useState<number[]>([]);
