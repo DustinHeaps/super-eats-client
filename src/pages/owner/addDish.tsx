@@ -78,11 +78,42 @@ export const AddDish = () => {
     });
     if (res.data?.createDish.success) {
       await client.refetchQueries({
-        include: [MyRestaurantDocument],
+        include: 'all'
       });
+      // const queryResult = client.readQuery({ query: MyRestaurantDocument });
+      // debugger
+      //   client.writeQuery({
+      //     query: MyRestaurantDocument,
+      //     data: {
+      //       myRestaurant: {
+      //         ...queryResult.restaurant,
+      //         menu: [
+      //           {
+      //             name,
+      //             price,
+      //             photo,
+      //             description,
+      //             options: {
+      //               name: name,
+      //               __typename: 'DishOption',
+      //             },
+      //             id: 15,
+      //             __typename: 'Dish',
+      //           },
+      //           ...queryResult.myRestaurant.restaurant,
+      //         ],
+      //       },
+      //     },
+      //   });
     }
 
     history.push(`/restaurants/${restaurantId}`);
+
+
+    if (res.errors) {
+      debugger
+      console.log(res.errors)
+    }
   };
 
   const [options, setOptions] = useState<number[]>([]);
@@ -96,7 +127,7 @@ export const AddDish = () => {
   };
 
   return (
-    <div className='container flex flex-col items-center mt-52'>
+    <div className='container flex flex-col items-center mt-16'>
       <Helmet>
         <title>Add Dish | Super Eats</title>
       </Helmet>

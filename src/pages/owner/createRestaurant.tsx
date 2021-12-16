@@ -55,10 +55,34 @@ export const AddRestaurant = () => {
       });
       if (res.data?.createRestaurant.success) {
         setUploading(false);
-        await client.refetchQueries({
-          include: [MyRestaurantsDocument],
-        });
+        // await client.refetchQueries({
+        //   include: [MyRestaurantsDocument],
+        // });
+        const queryResult = client.readQuery({ query: MyRestaurantsDocument });
 
+        client.writeQuery({
+          query: MyRestaurantsDocument,
+          data: {
+            myRestaurants: {
+              ...queryResult.myRestaurants,
+              restaurants: [
+                {
+                  name,
+                  address,
+                  category: {
+                    name: categoryName,
+                    __typename: 'Category',
+                  },
+                  coverImg: imageUrl,
+                  id: res.data.createRestaurant.restaurantId,
+                  isPromoted: false,
+                  __typename: 'Restaurant',
+                },
+                ...queryResult.myRestaurants.restaurants,
+              ],
+            },
+          },
+        });
         history.push('/');
       }
     } catch (err) {
