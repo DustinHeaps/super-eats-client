@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import { resolveSoa } from 'dns';
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useFieldArray, useForm } from 'react-hook-form';
@@ -47,6 +48,7 @@ export const AddDish = () => {
   } = useForm<FormProps>({ mode: 'onChange' });
 
   const onSubmit = async (data: any) => {
+    try {
     const { name, price, description, ...rest } = getValues();
     const optionObjects = options.map((theId) => ({
       name: rest[`${theId}-optionName`],
@@ -57,8 +59,10 @@ export const AddDish = () => {
     const formBody = new FormData();
     formBody.append('file', actualFile);
 
+    const fetchURL = process.env.NODE_ENV === 'production' ? 'https://uber-eats-server.herokuapp.com/uploads/' : 'http://localhost:5000/uploads/';
+
     const { url: photo } = await (
-      await fetch('https://uber-eats-server.herokuapp.com/uploads/', {
+      await fetch(fetchURL, {
         method: 'POST',
         body: formBody,
       })
@@ -80,40 +84,14 @@ export const AddDish = () => {
       await client.refetchQueries({
         include: 'all'
       });
-      // const queryResult = client.readQuery({ query: MyRestaurantDocument });
-      // debugger
-      //   client.writeQuery({
-      //     query: MyRestaurantDocument,
-      //     data: {
-      //       myRestaurant: {
-      //         ...queryResult.restaurant,
-      //         menu: [
-      //           {
-      //             name,
-      //             price,
-      //             photo,
-      //             description,
-      //             options: {
-      //               name: name,
-      //               __typename: 'DishOption',
-      //             },
-      //             id: 15,
-      //             __typename: 'Dish',
-      //           },
-      //           ...queryResult.myRestaurant.restaurant,
-      //         ],
-      //       },
-      //     },
-      //   });
     }
 
     history.push(`/restaurants/${restaurantId}`);
 
+  } catch (e) {
+    console.log(e)
+  }
 
-    if (res.errors) {
-      debugger
-      console.log(res.errors)
-    }
   };
 
   const [options, setOptions] = useState<number[]>([]);
