@@ -22,13 +22,7 @@ interface Params {
 
 export const MyRestaurant = () => {
   const { id } = useParams<Params>();
-  const { data } = useMyRestaurantQuery({
-    variables: {
-      input: {
-        id: +id,
-      },
-    },
-  });
+ 
   const [createPayment, { loading }] = useCreatePaymentMutation();
 
   const chartData = [
@@ -67,6 +61,13 @@ export const MyRestaurant = () => {
   }, []);
   // }, [subscriptionData]);
   const { data: meData } = useMeQuery();
+  const { data } = useMyRestaurantQuery({
+    variables: {
+      input: {
+        id: +id,
+      },
+    },
+  });
   const triggerPaddlePayment = () => {
     if (meData?.me.email) {
       // @ts-ignore
