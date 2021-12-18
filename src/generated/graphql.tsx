@@ -27,7 +27,7 @@ export type Category = {
   __typename?: 'Category';
   createdAt: Scalars['DateTime'];
   id: Scalars['Float'];
-  image: Scalars['String'];
+  image?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   restaurantCount: Scalars['Int'];
   restaurants: Array<Restaurant>;
@@ -599,7 +599,7 @@ export type VerifyEmailResponse = {
 
 export type RestaurantFragment = { __typename?: 'Restaurant', id: number, name: string, image: string, address: string, isPromoted: boolean, category?: { __typename?: 'Category', name: string } | null | undefined, menu?: Array<{ __typename?: 'Dish', id: number, name: string, price: number, photo?: string | null | undefined, description: string, options?: Array<{ __typename?: 'DishOption', name: string, extra?: number | null | undefined, choices?: Array<{ __typename?: 'DishChoice', name: string, extra?: number | null | undefined }> | null | undefined }> | null | undefined }> | null | undefined, orders?: Array<{ __typename?: 'Order', id: number, createdAt: any, total?: number | null | undefined }> | null | undefined };
 
-export type CategoryPartsFragment = { __typename?: 'Category', id: number, name: string, image: string, slug: string, restaurantCount: number };
+export type CategoryPartsFragment = { __typename?: 'Category', id: number, name: string, image?: string | null | undefined, slug: string, restaurantCount: number };
 
 export type DishPartsFragment = { __typename?: 'Dish', id: number, name: string, price: number, photo?: string | null | undefined, description: string, options?: Array<{ __typename?: 'DishOption', name: string, extra?: number | null | undefined, choices?: Array<{ __typename?: 'DishChoice', name: string, extra?: number | null | undefined }> | null | undefined }> | null | undefined };
 
@@ -694,7 +694,7 @@ export type VerifyEmailMutation = { __typename?: 'Mutation', verifyEmail: { __ty
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CategoriesQuery = { __typename?: 'Query', allCategories: { __typename?: 'CategoriesResponse', success: boolean, message?: string | null | undefined, categories?: Array<{ __typename?: 'Category', slug: string, name: string, restaurantCount: number, id: number, image: string }> | null | undefined } };
+export type CategoriesQuery = { __typename?: 'Query', allCategories: { __typename?: 'CategoriesResponse', success: boolean, message?: string | null | undefined, categories?: Array<{ __typename?: 'Category', slug: string, name: string, restaurantCount: number, id: number, image?: string | null | undefined }> | null | undefined } };
 
 export type GetCategoryQueryVariables = Exact<{
   input: CategoryInput;
@@ -1491,9 +1491,7 @@ export const RestaurantDocument = gql`
     success
     message
     restaurant {
-      image
-      name
-      id
+      ...Restaurant
     }
   }
 }
