@@ -65,11 +65,10 @@ export const Dashboard = () => {
   };
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'AIzaSyBK74LQtQHmXsctNfDEzU0VrTtUXyQl-VE',
+    // @ts-ignore
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
-
-  console.log(process.env);
-
+  
   const onLoad = React.useCallback(function callback(map) {
     // const bounds = new window.google.maps.LatLng(driverCoords.lat, driverCoords.lng)
     map.panTo(new window.google.maps.LatLng(driverCoords.lat, driverCoords.lng));
@@ -100,12 +99,12 @@ export const Dashboard = () => {
         },
         (result, status) => {
           directionRenderer.setDirections(result);
-          console.log(result, status);
+        
         }
       );
     }
   };
-  console.log(cookedData);
+
   return (
     <div>
       <div className='overflow-hidden' style={{ width: window.innerWidth, height: '95vh' }}>
@@ -135,7 +134,7 @@ export const Dashboard = () => {
               onClick={() => triggerMutation(cookedData?.cookedOrders.id)}
               className='block w-full mt-5 text-center btn'
             >
-              Accept Challenge &rarr;
+              Accept Order &rarr;
             </button>
           </>
         ) : (

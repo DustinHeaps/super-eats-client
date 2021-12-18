@@ -1,5 +1,6 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { isLoggedInVar } from '../apollo';
 import { LOCALSTORAGE_TOKEN } from '../constants';
@@ -10,8 +11,11 @@ export const Header: React.FC = () => {
   const history = useHistory();
 
   const logout = () => {
+    history.push('/')
     localStorage.removeItem(LOCALSTORAGE_TOKEN)
+    window.location.reload();
     isLoggedInVar(false);
+
   }
 
   return (
