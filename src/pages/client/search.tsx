@@ -9,10 +9,6 @@ export const Search = () => {
   const location = useLocation();
   const history = useHistory();
   const { data } = useSearchRestaurantsQuery({ variables: { input: { query: query } } });
-  // const [callQuery, { loading, data }] = useLazyQuery<
-  //   searchRestaurant,
-  //   searchRestaurantVariables
-  // >(SEARCH_RESTAURANT);
 
   useEffect(() => {
     const [_, query] = location.search.split('?term=');
@@ -20,14 +16,7 @@ export const Search = () => {
       return history.replace('/');
     }
     setQuery(query);
-    // search({
-    //   variables: {
-    //     input: {
-    //       page: 1,
-    //       query,
-    //     },
-    //   },
-    // });
+
   }, [history, location]);
   return (
     <>

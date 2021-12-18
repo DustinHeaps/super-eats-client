@@ -2,7 +2,6 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { useMeQuery } from '../generated/graphql';
-import logo from '../images/logo.svg';
 
 export const Header: React.FC = () => {
   const { data } = useMeQuery();

@@ -17,7 +17,7 @@ export const EditProfile: React.FC<Props> = ({ email, password }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<Props>({
     defaultValues: {
       email: data?.me.email,
@@ -77,7 +77,7 @@ export const EditProfile: React.FC<Props> = ({ email, password }) => {
           placeholder='Email'
         />
         <input {...register('password')} name='password' className='input' type='password' placeholder='Password' />
-        <Button loading={loading} isValid={isValid} actionText={'Update Profile'} />
+        <Button loading={loading} isValid={isValid} isSubmitting={isSubmitting} actionText={'Update Profile'} />
       </form>
     </div>
   );

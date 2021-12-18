@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './tailwind.css';
 import reportWebVitals from './reportWebVitals';
-import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 import { client } from './apollo';
 import { HelmetProvider } from 'react-helmet-async';
 import { App } from './components/App';

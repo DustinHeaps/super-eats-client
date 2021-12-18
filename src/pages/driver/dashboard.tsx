@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useCookedOrdersSubscription, useTakeOrderMutation } from '../../generated/graphql';
-import GoogleMapReact, { Position } from 'google-map-react';
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 require('dotenv').config();
 
@@ -10,13 +9,13 @@ interface Coords {
   lng: number;
 }
 
-interface DriverProps {
-  lat: number;
-  lng: number;
-  $hover?: any;
-}
+// interface DriverProps {
+//   lat: number;
+//   lng: number;
+//   $hover?: any;
+// }
 
-const Driver: React.FC<DriverProps> = () => <div className='text-lg'>🚙</div>;
+// const Driver: React.FC<DriverProps> = () => <div className='text-lg'>🚙</div>;
 
 export const Dashboard = () => {
   const [driverCoords, setDriverCoords] = useState<Coords>({ lng: 42.88023, lat: -78.878738 });
@@ -117,9 +116,7 @@ export const Dashboard = () => {
             zoom={16}
             onLoad={onLoad}
             onUnmount={onUnmount}
-          >
-            {/* <Driver lat={driverCoords.lat} lng={driverCoords.lng} /> */}
-            {/* <div className='text-lg'>🚙</div> */}
+          > 
             <Marker position={{ lat: driverCoords.lat, lng: driverCoords.lng }} />
           </GoogleMap>
         ) : (

@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Restaurant } from '../../components/Restaurant';

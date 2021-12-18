@@ -1,4 +1,4 @@
-import { gql, useApolloClient, useMutation } from '@apollo/client';
+import { useApolloClient } from '@apollo/client';
 import { Button } from '../../components/Button';
 import { FormError } from '../../components/FormError';
 import { useState } from 'react';
@@ -24,7 +24,7 @@ export const AddRestaurant = () => {
   const {
     register,
 
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
     handleSubmit,
   } = useForm<FormProps>({
     mode: 'onChange',
@@ -55,9 +55,7 @@ export const AddRestaurant = () => {
       });
       if (res.data?.createRestaurant.success) {
         setUploading(false);
-        // await client.refetchQueries({
-        //   include: [MyRestaurantsDocument],
-        // });
+    
         const queryResult = client.readQuery({ query: MyRestaurantsDocument });
 
         client.writeQuery({
@@ -132,7 +130,7 @@ export const AddRestaurant = () => {
             className='input '
           />
         </div>
-        <Button loading={uploading} isValid={isValid} actionText='Create Restaurant'></Button>
+        <Button loading={uploading} isValid={isValid} isSubmitting={isSubmitting} actionText='Create Restaurant'></Button>
         {data?.createRestaurant?.message && <FormError errorMessage={data.createRestaurant.message} />}
       </form>
     </div>

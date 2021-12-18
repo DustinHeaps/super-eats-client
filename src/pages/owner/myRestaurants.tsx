@@ -1,10 +1,8 @@
-import { useApolloClient } from '@apollo/client';
 import React from 'react';
-import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Restaurant } from '../../components/Restaurant';
-import { MyRestaurantsDocument, useMyRestaurantsQuery } from '../../generated/graphql';
+import { useMyRestaurantsQuery } from '../../generated/graphql';
 
 export const MyRestaurants = () => {
   const { data } = useMyRestaurantsQuery();

@@ -1,4 +1,3 @@
-import { useQuery, useSubscription } from '@apollo/client';
 import React, { useEffect } from 'react';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { Dish } from '../../components/Dish';
@@ -35,20 +34,12 @@ export const MyRestaurant = () => {
     { x: 7, y: 4500 },
   ];
 
-  // const { data: subscriptionData } = useSubscription<pendingOrders>(
-  //   PENDING_ORDERS_SUBSCRIPTION
-  // );
+
   const convert = () => {
     data?.myRestaurant.restaurant?.orders?.forEach((ord) => {
       var d = new Date(ord.createdAt);
-      // (d)
       console.log(moment(ord.createdAt).format('YYYY/MM/D hh:mm:ss SSS'));
-      // ord.createdAt
-      // const date = ord.createdAt;
-      //
-      //  const string = date.toIsoString()
-      // const string = new Date(date).toString()
-      // console.log(string)
+    
     });
   };
   const history = useHistory();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { gql, useQuery, useReactiveVar } from '@apollo/client';
+import { useReactiveVar } from '@apollo/client';
 import { LoggedInRouter } from '../routers/loggedInRouter';
 import { LoggedOutRouter } from '../routers/loggedOutRouter';
 import { isLoggedInVar } from '../apollo';

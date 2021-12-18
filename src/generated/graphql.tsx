@@ -1491,7 +1491,9 @@ export const RestaurantDocument = gql`
     success
     message
     restaurant {
-      ...Restaurant
+      image
+      name
+      id
     }
   }
 }

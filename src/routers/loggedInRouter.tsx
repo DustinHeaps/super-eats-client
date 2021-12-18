@@ -1,8 +1,6 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import { isLoggedInVar } from '../apollo';
 import { useMeQuery } from '../generated/graphql';
-import { BrowserRouter, BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Restaurants } from '../pages/client/restaurants';
 import { Header } from '../components/Header';
 import { NotFound } from '../pages/404';

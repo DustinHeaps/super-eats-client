@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useHistory } from 'react-router-dom';
-import { useForm, useFormState } from 'react-hook-form';
-import { useAllRestaurantsQuery, useCategoriesQuery, useRestaurantQuery } from '../../generated/graphql';
+import { useForm } from 'react-hook-form';
+import { useAllRestaurantsQuery, useCategoriesQuery } from '../../generated/graphql';
 import { Restaurant } from '../../components/Restaurant';
 
 export const Restaurants = () => {

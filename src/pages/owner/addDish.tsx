@@ -1,10 +1,7 @@
-import { useMutation } from '@apollo/client';
-import { resolveSoa } from 'dns';
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useFieldArray, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
-import { client } from '../../apollo';
 import { Button } from '../../components/Button';
 import { MyRestaurantDocument, useCreateDishMutation } from '../../generated/graphql';
 
@@ -23,31 +20,20 @@ export const AddDish = () => {
   const { restaurantId } = useParams<Params>();
   const history = useHistory();
   const [createDish, { loading }] = useCreateDishMutation();
-  // const [createDishMutation, { loading }] = useMutation<
-  //   createDish,
-  //   createDishVariables
-  // >(CREATE_DISH_MUTATION, {
-  //   refetchQueries: [
-  //     {
-  //       query: MY_RESTAURANT_QUERY,
-  //       variables: {
-  //         input: {
-  //           id: +restaurantId,
-  //         },
-  //       },
-  //     },
-  //   ],
-  // });
+
   const {
     register,
     getValues,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
     setValue,
     control,
   } = useForm<FormProps>({ mode: 'onChange' });
 
   const onSubmit = async (data: any) => {
+    if (!loading) {
+
+  
     try {
     const { name, price, description, ...rest } = getValues();
     const optionObjects = options.map((theId) => ({
@@ -78,22 +64,25 @@ export const AddDish = () => {
           restaurantId: +restaurantId,
           options: optionObjects,
         },
-      },
+      },  
+      refetchQueries: [
+        {
+          query: MyRestaurantDocument,
+          variables: {
+            input: {
+              id: +restaurantId,
+            },
+          },
+        },
+      ],
     });
     if (res.data?.createDish.success) {
-      await client.refetchQueries({
-        include: 'all'
-      });
-      
       history.push(`/restaurants/${restaurantId}`);
     }
-
-   
-
   } catch (e) {
     console.log(e)
   }
-
+}
   };
 
   const [options, setOptions] = useState<number[]>([]);
@@ -179,7 +168,7 @@ export const AddDish = () => {
             ))}
         </div>
 
-        <Button loading={loading} isValid={isValid} actionText='Create Dish' />
+        <Button loading={loading} isValid={isValid} isSubmitting={isSubmitting}  actionText='Create Dish' />
       </form>
     </div>
   );

@@ -1,10 +1,9 @@
 import { Helmet } from 'react-helmet-async';
-import { useForm, useFormState } from 'react-hook-form';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { Link, useHistory } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { FormError } from '../components/FormError';
 import { useRegisterMutation, UserRole } from '../generated/graphql';
-import logo from '../images/logo.svg';
 
 interface RegisterForm {
   email: string;
@@ -17,7 +16,7 @@ export const Register = () => {
     register,
     getValues,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<RegisterForm>({
     mode: 'onChange',
     defaultValues: {
@@ -86,7 +85,7 @@ export const Register = () => {
                 );
               })}
             </select>
-            <Button isValid={isValid} loading={loading} actionText={'Create Account'} />
+            <Button isValid={isValid} loading={loading} isSubmitting={isSubmitting} actionText={'Create Account'} />
             {errors.password?.message && <FormError errorMessage={errors.password.message} />}
             {data?.register.message && <FormError errorMessage={data.register.message} />}
             <div className='mt-3'>

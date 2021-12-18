@@ -1,11 +1,11 @@
 import { Helmet } from 'react-helmet-async';
-import { useForm, useFormState } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { isLoggedInVar, jwtToken } from '../apollo';
 import { Button } from '../components/Button';
 import { FormError } from '../components/FormError';
 import { useLoginMutation } from '../generated/graphql';
-import logo from '../images/logo.svg';
+
 
 interface LoginForm {
   email: string;
@@ -17,7 +17,7 @@ export const Login = () => {
     register,
     getValues,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<LoginForm>({
     mode: 'onChange',
   });
@@ -77,7 +77,7 @@ export const Login = () => {
               required
             />
 
-            <Button isValid={isValid} loading={loading} actionText={'Log in'} />
+            <Button isValid={isValid} loading={loading} isSubmitting={isSubmitting} actionText={'Log in'} />
             {/* <button role='button'>submit</button> */}
             {errors.password?.message && <FormError errorMessage={errors.password.message} />}
             {data?.login.message && <FormError errorMessage={data.login.message} />}

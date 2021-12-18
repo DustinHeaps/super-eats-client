@@ -30,4 +30,3 @@ export const Restaurant: React.FC<RestaurantProps> = ({
   )
 }
  
-// );

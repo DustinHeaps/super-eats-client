@@ -1,7 +1,7 @@
 import { gql, useApolloClient } from '@apollo/client';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useMeQuery, useVerifyEmailMutation } from '../../generated/graphql';
 
 export const ConfirmEmail = () => {
