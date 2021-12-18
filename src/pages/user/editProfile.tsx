@@ -17,7 +17,7 @@ export const EditProfile: React.FC<Props> = ({ email, password }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isSubmitting },
+    formState: { isValid, isSubmitting },
   } = useForm<Props>({
     defaultValues: {
       email: data?.me.email,
