@@ -1,10 +1,19 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { isLoggedInVar } from '../apollo';
+import { LOCALSTORAGE_TOKEN } from '../constants';
 import { useMeQuery } from '../generated/graphql';
 
 export const Header: React.FC = () => {
   const { data } = useMeQuery();
+  const history = useHistory();
+
+  const logout = () => {
+    localStorage.removeItem(LOCALSTORAGE_TOKEN)
+    isLoggedInVar(false);
+  }
+
   return (
     <>
       {/* {!data?.me.verified && (
@@ -18,7 +27,8 @@ export const Header: React.FC = () => {
            <p className='text-2xl'>Super <span className='text-lime-600 font-medium'>Eats</span></p> 
 
           </Link>
-          <span className='text-xs'>
+          <span className='text-sm flex items-center'>
+            <p onClick={logout} className='text-lime-600 hover:underline cursor-pointer pr-4'>Logout</p>
             <Link to='/edit-profile'>
               <FontAwesomeIcon icon={faUser} className='text-lg' />
             </Link>

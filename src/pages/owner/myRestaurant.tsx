@@ -85,25 +85,26 @@ export const MyRestaurant = () => {
       });
     }
   };
+  const restaurant = data?.myRestaurant.restaurant;
 
   return (
     <div>
       <Helmet>
-        <title>{data?.myRestaurant.restaurant?.name || '...loading'} | Super Eats</title>
+        <title>{restaurant?.name || '...loading'} | Super Eats</title>
         <script src='https://cdn.paddle.com/paddle/paddle.js'></script>
       </Helmet>
 
       <div
         className='bg-gray-700 bg-center bg-cover py-28'
         style={{
-          backgroundImage: `url('${data?.myRestaurant.restaurant?.image}')`,
+          backgroundImage: `url('${restaurant?.image}')`,
         }}
       ></div>
       <div className='container mx-auto mt-10'>
-        {data?.myRestaurant.restaurant && (
+        {restaurant && (
           <>
-            <h2 className='text-4xl font-medium'>{data?.myRestaurant.restaurant?.name}</h2>
-            <h4 className='mb-5 pt-1 font-light text-xs text-gray-600'>{data?.myRestaurant.restaurant?.address}</h4>
+            <h2 className='text-4xl font-medium'>{restaurant?.name}</h2>
+            <h4 className='mb-5 pt-1 font-light text-xs text-gray-600'>{restaurant?.address}</h4>
           </>
         )}
 
@@ -114,11 +115,11 @@ export const MyRestaurant = () => {
           Buy Promotion &rarr;
         </span>
         <div className='mt-10'>
-          {data?.myRestaurant.restaurant?.menu?.length === 0 ? (
+          {restaurant?.menu?.length === 0 ? (
             <h4>Please upload a dish</h4>
           ) : (
             <div className='mt-16 grid md:grid-cols-3 gap-x-5 gap-y-10'>
-              {data?.myRestaurant.restaurant?.menu?.map((dish, index) => (
+              {restaurant?.menu?.map((dish, index) => (
                 <Dish
                   key={index}
                   name={dish.name}
@@ -131,9 +132,11 @@ export const MyRestaurant = () => {
             </div>
           )}
         </div>
-        <div className='mt-20 mb-10'>
         
-          {data?.myRestaurant.restaurant?.orders?.length === 0 ? (
+        <div className='mt-20 mb-10'>
+     
+          {restaurant?.orders?.length === 0 || !restaurant?.orders  ? (
+            
             <h4 className='text-2xl font-medium text-center'>No Sales Yet</h4>
           ) : (
             <>
@@ -149,7 +152,7 @@ export const MyRestaurant = () => {
                   <VictoryLine
                     labels={({ datum }) => `$${datum.y}`}
                     labelComponent={<VictoryLabel style={{ fontSize: 18 } as any} renderInPortal dy={-20} />}
-                    data={data?.myRestaurant.restaurant?.orders?.map((order) => ({
+                    data={restaurant?.orders?.map((order) => ({
                       x: order.createdAt.toString(),
                       y: order.total,
                     }))}
